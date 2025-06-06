@@ -1,0 +1,9 @@
+services:
+  elasticnotebook:
+    image: ryutarom/elasticnotebook:latest
+    container_name: elasticnotebook
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./.data:/app/ # ノートブックの永続化をする場合はコメントアウトを外す
+    restart: unless-stopped
