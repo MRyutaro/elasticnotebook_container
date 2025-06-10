@@ -27,3 +27,7 @@ docker compose up
 docker tag elasticnotebook ryutarom/elasticnotebook
 docker push ryutarom/elasticnotebook
 ```
+
+## その他
+
+- JupyterLab接続時のトークンを固定したい場合は環境変数`JUPYTER_TOKEN`の値を設定してください．

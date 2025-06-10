@@ -1,9 +1,10 @@
 services:
   elasticnotebook:
     image: ryutarom/elasticnotebook:latest
-    container_name: elasticnotebook
     ports:
       - "8888:8888"
+    environment:
+      - JUPYTER_TOKEN=${JUPYTER_TOKEN:-}
     volumes:
-      - ./.data:/app/ # ノートブックの永続化をする場合はコメントアウトを外す
+      - ./.data:/app/
     restart: unless-stopped
