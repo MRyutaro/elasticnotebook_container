@@ -11,10 +11,10 @@ WORKDIR /tmp
 
 # ライブラリのインストール
 RUN pip install jupyter elastic-notebook-slim && \
-    git clone https://github.com/MRyutaro/jupyter_elastic_kernel.git && \
-    chmod +x jupyter_elastic_kernel/setup.sh && \
-    jupyter_elastic_kernel/setup.sh /tmp/jupyter_elastic_kernel /usr/local/share/jupyter/kernels && \
-    rm -rf /tmp/jupyter_elastic_kernel
+    git clone https://github.com/MRyutaro/ElasticKernel.git && \
+    chmod +x ElasticKernel/setup.sh && \
+    ElasticKernel/setup.sh /tmp/ElasticKernel /usr/local/share/jupyter/kernels && \
+    rm -rf /tmp/ElasticKernel
 
 # ディレクトリを移動
 WORKDIR /app
