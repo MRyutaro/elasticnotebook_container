@@ -3,18 +3,20 @@ FROM python:3.12-slim-bookworm
 
 # 必要なパッケージのインストール
 RUN apt-get update && \
-    apt-get install -y git libgomp1 && \
+    apt-get install -y --no-install-recommends git libgomp1 && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# tmpディレクトリに移動
+# tmpディレクトリに移動してライブラリをインストール
 WORKDIR /tmp
 
-# ライブラリのインストール
-RUN pip install jupyter elastic-notebook-slim && \
-    git clone https://github.com/MRyutaro/ElasticKernel.git && \
+# すべての操作を1つのRUNコマンドにまとめる
+RUN pip install --no-cache-dir jupyter elastic-notebook-slim && \
+    git clone --depth 1 https://github.com/MRyutaro/ElasticKernel.git && \
     chmod +x ElasticKernel/setup.sh && \
     ElasticKernel/setup.sh /tmp/ElasticKernel /usr/local/share/jupyter/kernels && \
-    rm -rf /tmp/ElasticKernel
+    rm -rf /tmp/ElasticKernel && \
+    rm -rf ~/.cache/pip/*
 
 # ディレクトリを移動
 WORKDIR /app

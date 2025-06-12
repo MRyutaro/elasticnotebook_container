@@ -40,7 +40,9 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push Docker image
-        if: steps.check.outputs.update_needed == 'true'
+        if: |
+          github.event_name == 'push' ||
+          steps.check.outputs.elastic_kernel_updated == 'true'
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -48,3 +50,8 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/elasticnotebook:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/elasticnotebook:${{ github.sha }}
+          # 単一プラットフォームのみを明示的に指定
+          platforms: linux/amd64
+          # 余分な機能を無効化
+          provenance: false
+          sbom: false
