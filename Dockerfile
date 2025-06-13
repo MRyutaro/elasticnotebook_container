@@ -1,6 +1,9 @@
 # Pythonの軽量イメージを使用
 FROM python:3.12-slim-bookworm
 
+# uvのセットアップ
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
 # 必要なパッケージのインストール
 RUN apt-get update && \
     apt-get install -y --no-install-recommends git libgomp1 && \
@@ -11,7 +14,7 @@ RUN apt-get update && \
 WORKDIR /tmp
 
 # すべての操作を1つのRUNコマンドにまとめる
-RUN pip install --no-cache-dir jupyter elastic-notebook-slim && \
+RUN uv pip install --no-cache-dir --system jupyter elastic-notebook-slim && \
     git clone --depth 1 https://github.com/MRyutaro/ElasticKernel.git && \
     chmod +x ElasticKernel/setup.sh && \
     ElasticKernel/setup.sh /tmp/ElasticKernel /usr/local/share/jupyter/kernels && \
