@@ -1,6 +1,8 @@
 services:
   elasticnotebook:
-    image: ryutarom/elasticnotebook:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8888:8888"
     environment:
