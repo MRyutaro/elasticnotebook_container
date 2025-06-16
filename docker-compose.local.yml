@@ -6,6 +6,7 @@ services:
     ports:
       - "8888:8888"
     environment:
+      - TZ=Asia/Tokyo
       - JUPYTER_TOKEN=${JUPYTER_TOKEN:-}
       - ELASTIC_KERNEL_LOG_LEVEL=${ELASTIC_KERNEL_LOG_LEVEL:-INFO}
       - ELASTIC_KERNEL_SHUTDOWN_SLEEP=0
