@@ -8,6 +8,8 @@ services:
     environment:
       - JUPYTER_TOKEN=${JUPYTER_TOKEN:-}
       - ELASTIC_KERNEL_LOG_LEVEL=${ELASTIC_KERNEL_LOG_LEVEL:-INFO}
+      - ELASTIC_KERNEL_SHUTDOWN_SLEEP=0
     volumes:
-      - ./.data:/app/
+      - ./.app:/app/
     restart: unless-stopped
+    stop_grace_period: 300s

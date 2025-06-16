@@ -7,5 +7,5 @@ services:
       - JUPYTER_TOKEN=${JUPYTER_TOKEN:-}
       - ELASTIC_KERNEL_LOG_LEVEL=${ELASTIC_KERNEL_LOG_LEVEL:-INFO}
     volumes:
-      - ./.data:/app/
+      - ./.app:/app/
     restart: unless-stopped
